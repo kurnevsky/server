@@ -1,0 +1,4 @@
+- name: "Install tt-rss"
+  pacman:
+    name: tt-rss
+    state: present

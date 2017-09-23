@@ -13,3 +13,5 @@
   roles:
     - role: postgresql
       tags: [ 'postgresql' ]
+    - role: tt-rss
+      tags: [ 'tt-rss' ]
