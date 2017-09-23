@@ -1,0 +1,15 @@
+- hosts: servers
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - name: install python
+      raw: pacman -S --needed --noconfirm python2
+      changed_when: False
+
+- hosts: servers
+  become: true
+  become_user: root
+  roles:
+    - role: postgresql
+      tags: [ 'postgresql' ]

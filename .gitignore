@@ -1,0 +1,3 @@
+*.retry
+.vagrant/
+vault_raw.yml
