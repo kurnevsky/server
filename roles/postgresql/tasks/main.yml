@@ -2,3 +2,18 @@
   pacman:
     name: postgresql
     state: present
+
+- stat:
+    path: /var/lib/postgres/data/base
+  register: postgres_data
+
+- name: "Init postgresql database cluster"
+  shell: initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
+  become: true
+  become_user: postgres
+  when: not postgres_data.stat.exists
+
+- name: "Start postgresql daemon"
+  systemd:
+    name: postgresql
+    state: started

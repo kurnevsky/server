@@ -2,3 +2,13 @@
   pacman:
     name: tt-rss
     state: present
+
+- name: "Add ttrss postgersql db"
+  postgresql_db:
+    name: ttrss
+
+- name: "Add ttrss postgersql user"
+  postgresql_user:
+    db: ttrss
+    name: ttrss
+    password: qwerty

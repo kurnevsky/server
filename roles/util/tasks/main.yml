@@ -1,0 +1,9 @@
+- name: "Install helpful tools"
+  pacman:
+    name: zsh
+    state: present
+
+- name: "Install ansible utils"
+  pacman:
+    name: python2-psycopg2
+    state: present

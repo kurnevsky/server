@@ -11,7 +11,9 @@
   become: true
   become_user: root
   roles:
+    - role: util
+      tags: ['util']
     - role: postgresql
-      tags: [ 'postgresql' ]
+      tags: ['postgresql']
     - role: tt-rss
-      tags: [ 'tt-rss' ]
+      tags: ['tt-rss']
