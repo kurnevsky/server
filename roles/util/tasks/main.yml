@@ -1,7 +1,11 @@
 - name: "Install helpful tools"
   pacman:
-    name: zsh
+    name: "{{ item }}"
     state: present
+  with_items:
+    - zsh
+    - mc
+    - p7zip
 
 - name: "Install ansible utils"
   pacman:
