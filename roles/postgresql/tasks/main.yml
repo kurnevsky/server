@@ -3,7 +3,8 @@
     name: postgresql
     state: present
 
-- stat:
+- name: "Check if postgersql is initialized"
+  stat:
     path: /var/lib/postgres/data/base
   register: postgres_data
 

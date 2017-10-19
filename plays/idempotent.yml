@@ -17,3 +17,5 @@
       tags: ['postgresql']
     - role: tt-rss
       tags: ['tt-rss']
+    - role: nginx
+      tags: ['nginx']

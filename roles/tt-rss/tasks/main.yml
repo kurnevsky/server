@@ -1,3 +1,8 @@
+- name: "Install php-pgsql"
+  pacman:
+    name: php-pgsql
+    state: present
+
 - name: "Install tt-rss"
   pacman:
     name: tt-rss
@@ -6,9 +11,40 @@
 - name: "Add ttrss postgersql db"
   postgresql_db:
     name: ttrss
+  register: postgres_db
 
 - name: "Add ttrss postgersql user"
   postgresql_user:
     db: ttrss
     name: ttrss
     password: qwerty
+
+- name: "Create tt-rss db schema"
+  shell: psql ttrss -U ttrss -f /usr/share/webapps/tt-rss/schema/ttrss_schema_pgsql.sql
+  when: postgres_db.changed
+
+- name: "Enable php extensions"
+  lineinfile:
+    path: /etc/php/php.ini
+    regexp: '^\s*;?\s*extension={{ item }}\.so$'
+    line: 'extension={{ item }}.so'
+  with_items:
+    - curl
+    - iconv
+    - pdo_pgsql
+    - soap
+
+- name: "Put tt-rss config"
+  copy:
+    src: files/config.php
+    dest: /etc/webapps/tt-rss/config.php
+
+- name: "Put systemd service"
+  copy:
+    src: files/tt-rss.service
+    dest: /etc/systemd/system/tt-rss.service
+
+- name: "Start tt-rss sync daemon"
+  systemd:
+    name: tt-rss
+    state: started
