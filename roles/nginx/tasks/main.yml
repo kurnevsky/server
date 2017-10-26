@@ -2,3 +2,13 @@
   pacman:
     name: nginx
     state: present
+
+- name: "Put nginx config"
+  copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+
+- name: "Start nginx daemon"
+  systemd:
+    name: nginx
+    state: started
