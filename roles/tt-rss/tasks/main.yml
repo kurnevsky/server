@@ -18,6 +18,7 @@
     db: ttrss
     name: ttrss
     password: qwerty
+    encrypted: yes
 
 - name: "Create tt-rss db schema"
   shell: psql ttrss -U ttrss -f /usr/share/webapps/tt-rss/schema/ttrss_schema_pgsql.sql
@@ -26,12 +27,12 @@
 - name: "Enable php extensions"
   lineinfile:
     path: /etc/php/php.ini
-    regexp: '^\s*;?\s*extension={{ item }}\.so$'
-    line: 'extension={{ item }}.so'
+    regexp: '^\s*;?\s*extension={{ item }}$'
+    line: 'extension={{ item }}'
   with_items:
     - curl
     - iconv
-    - pdo_pgsql
+    - pgsql
     - soap
 
 - name: "Put tt-rss config"

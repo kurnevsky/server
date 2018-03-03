@@ -1,0 +1,9 @@
+- name: "Install php-fpm"
+  pacman:
+    name: php-fpm
+    state: present
+
+- name: "Start php-fpm daemon"
+  systemd:
+    name: php-fpm
+    state: started
