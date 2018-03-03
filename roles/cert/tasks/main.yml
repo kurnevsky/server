@@ -1,8 +1,3 @@
-- name: "Install python2-pyopenssl"
-  pacman:
-    name: python2-pyopenssl
-    state: present
-
 - name: "Generate OpenSSL private key"
   openssl_privatekey:
     path: /kurnevsky.net.pem

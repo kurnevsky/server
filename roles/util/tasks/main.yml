@@ -10,8 +10,11 @@
 
 - name: "Install ansible utils"
   pacman:
-    name: python2-psycopg2
+    name: "{{ item }}"
     state: present
+  with_items:
+    - python2-psycopg2
+    - python2-pyopenssl
 
 - name: "Add authorized key for root"
   authorized_key:
