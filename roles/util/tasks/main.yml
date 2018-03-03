@@ -12,3 +12,9 @@
   pacman:
     name: python2-psycopg2
     state: present
+
+- name: "Add authorized key for root"
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
