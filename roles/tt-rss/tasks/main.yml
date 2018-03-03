@@ -49,3 +49,9 @@
   systemd:
     name: tt-rss
     state: started
+
+- name: "Add ttrss backup cron job"
+  cron:
+    name: "ttrss backup"
+    hour: "*/4"
+    job: "sudo -u postgres pg_dump ttrss | 7z a /ttrss.7z -mx3 -sittrss.sql"
