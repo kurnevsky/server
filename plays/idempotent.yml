@@ -13,6 +13,8 @@
   roles:
     - role: util
       tags: ['util']
+    - role: iptables
+      tags: ['iptables']
     - role: postgresql
       tags: ['postgresql']
     - role: tt-rss
