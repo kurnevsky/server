@@ -7,5 +7,4 @@
 - name: "Enable iptables loader"
   systemd:
     name: iptables
-    state: started
     enabled: yes
