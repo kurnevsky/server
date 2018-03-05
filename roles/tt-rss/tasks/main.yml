@@ -49,6 +49,7 @@
   systemd:
     name: tt-rss
     state: started
+    enabled: yes
 
 - name: "Add ttrss backup cron job"
   cron:
