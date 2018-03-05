@@ -5,6 +5,9 @@
 # Add your user to libvirt group: gpasswd -a user libvirt
 # Run: vagrant up --provider=libvirt
 # Credentials: vagrant:vagrant
+# In case of error that name of domain about to create is already taken run:
+# - virsh list --all
+# - virsh undefine (id | name)
 
 Vagrant.configure(2) do |config|
   config.vm.provider "libvirt" do |libvirt|
