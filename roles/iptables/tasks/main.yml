@@ -2,9 +2,7 @@
   copy:
     src: files/iptables.rules
     dest: /etc/iptables/iptables.rules
-
-- name: "Apply iptables rules"
-  shell: iptables-restore /etc/iptables/iptables.rules 
+  notify: "Apply iptables rules"
 
 - name: "Enable iptables loader"
   systemd:
