@@ -1,33 +1,13 @@
-- name: "Accept input packets from localhost"
-  iptables:
-    chain: INPUT
-    in_interface: lo
-    jump: ACCEPT
+- name: "Put iptables.rules"
+  copy:
+    src: files/iptables.rules
+    dest: /etc/iptables/iptables.rules
 
-- name: "Accept TCP input packets to SSH, HTTP, HTTPS, Tinc ports"
-  iptables:
-    chain: INPUT
-    protocol: tcp
-    match: tcp
-    destination_port: "{{ item }}"
-    jump: ACCEPT
-  with_items: [ 22, 80, 443, 655 ]
+- name: "Apply iptables rules"
+  shell: iptables-restore /etc/iptables/iptables.rules 
 
-- name: "Accept UDP input packets to Tinc port"
-  iptables:
-    chain: INPUT
-    protocol: udp
-    match: udp
-    destination_port: 655
-    jump: ACCEPT
-
-- name: "Accept related/established TCP packets"
-  iptables:
-    chain: INPUT
-    ctstate: ESTABLISHED,RELATED
-    jump: ACCEPT
-
-- name: "Drop other TCP input packets"
-  iptables:
-    chain: INPUT
-    jump: DROP
+- name: "Enable iptables loader"
+  systemd:
+    name: iptables
+    state: started
+    enabled: yes
