@@ -1,0 +1,40 @@
+- name: "Install tinc"
+  pacman:
+    name: tinc
+    state: present
+
+- name: "Create tinc config directory"
+  file:
+    path: /etc/tinc/kvpn
+    state: directory
+
+- name: "Put tinc config"
+  template:
+    src: templates/tinc.conf.j2
+    dest: /etc/tinc/kvpn/tinc.conf
+
+- name: "Put tinc-up script"
+  copy:
+    src: files/tinc-up
+    dest: /etc/tinc/kvpn/tinc-up
+    mode: 0755
+
+- name: "Put tinc-down script"
+  copy:
+    src: files/tinc-down
+    dest: /etc/tinc/kvpn/tinc-down
+    mode: 0755
+
+- name: "Generate tinc private key"
+  shell: echo | tincd -n kvpn -K 4096
+
+- name: "Create tinc hosts directory"
+  file:
+    path: /etc/tinc/kvpn/hosts
+    state: directory
+
+- name: "Start tinc daemon"
+  systemd:
+    name: tinc
+    state: started
+    enabled: yes
