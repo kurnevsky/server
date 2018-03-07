@@ -17,7 +17,7 @@
   postgresql_user:
     db: ttrss
     name: ttrss
-    password: qwerty
+    password: "{{ ttrss_postgersql_password }}"
     encrypted: yes
 
 - name: "Create tt-rss db schema"
@@ -36,8 +36,8 @@
     - soap
 
 - name: "Put tt-rss config"
-  copy:
-    src: files/config.php
+  template:
+    src: templates/config.php.j2
     dest: /etc/webapps/tt-rss/config.php
 
 - name: "Put systemd service"
