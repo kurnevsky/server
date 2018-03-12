@@ -1,0 +1,6 @@
+- hosts: servers
+  become: true
+  become_user: root
+  roles:
+    - role: tt-rss-restore
+      tags: ['tt-rss-restore']

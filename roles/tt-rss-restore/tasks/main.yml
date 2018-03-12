@@ -1,0 +1,32 @@
+- name: "Upload tt-rss backup"
+  copy:
+    src: "{{ ttrss_backup_path }}"
+    dest: /tmp/ttrss.7z
+
+- name: "Stop tt-rss sync daemon"
+  systemd:
+    name: tt-rss
+    state: stopped
+
+- name: "Drop tt-rss database"
+  postgresql_db:
+    name: ttrss
+    state: absent
+
+- name: "Create tt-rss database"
+  postgresql_db:
+    name: ttrss
+    state: present
+
+- name: "Restore tt-rss backup"
+  shell: 7z e -so /tmp/ttrss.7z ttrss.sql | psql -U postgres ttrss
+
+- name: "Delete tt-rss backup"
+  file:
+    path: /tmp/ttrss.7z
+    state: absent
+
+- name: "Start tt-rss sync daemon"
+  systemd:
+    name: tt-rss
+    state: started

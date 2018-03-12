@@ -25,6 +25,11 @@
     dest: /etc/tinc/kvpn/tinc-down
     mode: 0755
 
+- name: "Create tinc hosts directory"
+  file:
+    path: /etc/tinc/kvpn/hosts
+    state: directory
+
 - name: "Check tinc private key"
   stat: path=/etc/tinc/kvpn/rsa_key.priv
   register: tinc_key
@@ -32,11 +37,6 @@
 - name: "Generate tinc private key"
   shell: echo | tincd -n kvpn -K 4096
   when: not tinc_key.stat.exists
-
-- name: "Create tinc hosts directory"
-  file:
-    path: /etc/tinc/kvpn/hosts
-    state: directory
 
 - name: "Start tinc daemon"
   systemd:
