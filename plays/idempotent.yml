@@ -23,7 +23,5 @@
       tags: ['tt-rss']
     - role: php-fpm
       tags: ['php-fpm']
-    - role: cert
-      tags: ['cert']
     - role: nginx
       tags: ['nginx']

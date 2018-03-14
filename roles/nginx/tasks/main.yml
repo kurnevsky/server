@@ -3,6 +3,53 @@
     name: nginx-mainline
     state: present
 
+- block:
+    - name: "Generate OpenSSL private key"
+      openssl_privatekey:
+        path: /kurnevsky.net.pem
+        size: 4096
+    - name: "Generate OpenSSL certificate signing request"
+      openssl_csr:
+        path: /kurnevsky.net.csr
+        privatekey_path: /kurnevsky.net.pem
+        country_name: BY
+        email_address: kurnevsky@gmail.com
+        common_name: kurnevsky.net
+    - name: "Generate a Self Signed OpenSSL certificate"
+      openssl_certificate:
+        path: /kurnevsky.net.crt
+        privatekey_path: /kurnevsky.net.pem
+        csr_path: /kurnevsky.net.csr
+        provider: selfsigned
+  when: not acme
+
+- block:
+    - name: "Install certbot"
+      pacman:
+        name: certbot
+        state: present
+    - name: "Check if certificate already exists"
+      stat:
+        path: /etc/letsencrypt/live/kurnevsky.net/cert.pem
+      register: letsencrypt_cert
+    - block:
+        - name: "Put nginx config"
+          copy:
+            src: files/nginx-acme.conf
+            dest: /etc/nginx/nginx.conf
+        - name: "Start nginx daemon"
+          systemd:
+            name: nginx
+            state: started
+        - name: "Generate a Let's Encrypt Certificate"
+          shell: certbot certonly --agree-tos --email kurnevsky@gmail.com --webroot -w /var/lib/letsencrypt/ -d kurnevsky.net
+        - name: "Stop nginx daemon"
+          systemd:
+            name: nginx
+            state: stopped
+      when: not letsencrypt_cert.stat.exists
+  when: acme
+
 - name: "Put nginx config"
   copy:
     src: files/nginx.conf
