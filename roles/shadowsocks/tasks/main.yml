@@ -1,0 +1,36 @@
+- name: "Install shadowsocks"
+  pacman:
+    name: shadowsocks-libev
+    state: present
+
+- name: "Install simple obfs"
+  pacman:
+    name: simple-obfs
+    state: present
+
+- name: "Create shadowsocks config directory"
+  file:
+    path: /etc/shadowsocks
+    state: directory
+
+- name: "Put shadowsocks config"
+  template:
+    src: templates/config.json.j2
+    dest: /etc/shadowsocks/config.json
+
+- name: "Start shadowsocks daemon"
+  systemd:
+    name: shadowsocks-libev-server@config
+    state: started
+    enabled: yes
+
+- name: "Put obfs-tls systemd service"
+  copy:
+    src: files/obfs-tls@.service
+    dest: /etc/systemd/system/obfs-tls@.service
+
+- name: "Start obfs-tls daemon"
+  systemd:
+    name: obfs-tls@{{ ansible_host }}
+    state: started
+    enabled: yes

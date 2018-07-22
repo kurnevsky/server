@@ -1,0 +1,11 @@
+[Unit]
+Description=Obfs server with tls obfuscation mode
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/obfs-server -s %i -p 443 --obfs tls -r 127.0.0.1:8388 --failover 127.0.0.1:8443
+
+[Install]
+WantedBy=multi-user.target

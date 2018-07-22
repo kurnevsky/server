@@ -25,3 +25,5 @@
       tags: ['php-fpm']
     - role: nginx
       tags: ['nginx']
+    - role: shadowsocks
+      tags: ['shadowsocks']
