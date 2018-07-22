@@ -1,7 +1,7 @@
 # Install packages: pacman -S vagrant ebtables dnsmasq firewalld
 # Optionally install package from aur: pacaur -S vagrant-libvirt
 # Start daemons: systemctl start firewalld && systemctl start libvirtd
-# Install vagrant-libvirt plugin: vagrant plugin install vagrant-libvirt
+# Install vagrant-libvirt plugin: vagrant plugin install pkg-config && vagrant plugin install vagrant-libvirt
 # Add your user to libvirt group: gpasswd -a user libvirt
 # Run: vagrant up --provider=libvirt
 # Credentials: vagrant:vagrant
@@ -13,6 +13,11 @@ Vagrant.configure(2) do |config|
   config.vm.provider "libvirt" do |libvirt|
     # libvirt.driver = "qemu"
     libvirt.driver = "kvm"
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "plays/idempotent.yml"
+    ansible.inventory_path = "inventory/vagrant"
   end
 
   # Add possibility to use ~/.vagrant.d/insecure_private_key
