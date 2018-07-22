@@ -3,6 +3,12 @@
     name: postgresql
     state: present
 
+- name: "Set postgresql home owner"
+  file:
+    path: /var/lib/postgres
+    owner: postgres
+    group: postgres
+
 - name: "Check if postgersql is initialized"
   stat:
     path: /var/lib/postgres/data/base
