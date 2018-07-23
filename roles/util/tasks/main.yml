@@ -45,3 +45,9 @@
   user:
     name: root
     shell: /bin/zsh
+
+- name: "Start cronie daemon"
+  systemd:
+    name: cronie
+    state: started
+    enabled: yes
