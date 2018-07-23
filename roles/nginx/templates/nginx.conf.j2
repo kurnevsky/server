@@ -64,25 +64,6 @@ http {
       index index.php;
     }
 
-    location ~ ^/owncloud/(build|tests|config|lib|3rdparty|templates|data)/ {
-      deny all;
-      error_page 403 = /owncloud/core/templates/403.php;
-    }
-
-    location ~ ^/owncloud/(?:\.|autotest|occ|issue|indie|db_|console) {
-      deny all;
-      error_page 403 = /owncloud/core/templates/403.php;
-    }
-
-    location /owncloud {
-      rewrite ^/owncloud/.well-known/host-meta /owncloud/public.php?service=host-meta last;
-      rewrite ^/owncloud/.well-known/host-meta.json /owncloud/public.php?service=host-meta-json last;
-      rewrite ^/owncloud/.well-known/carddav /owncloud/remote.php/carddav/ redirect;
-      rewrite ^/owncloud/.well-known/caldav /owncloud/remote.php/caldav/ redirect;
-      rewrite ^(/owncloud/core/doc/[^\/]+/)$ /owncloud/$1/index.html;
-      try_files $uri $uri/ =404;
-    }
-
     location ~ \.php(?:$|/) {
       fastcgi_split_path_info ^(.+\.php)(/.+)$;
       fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
