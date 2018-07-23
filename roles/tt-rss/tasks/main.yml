@@ -56,4 +56,5 @@
   cron:
     name: "ttrss backup"
     hour: "*/4"
+    minute: "0"
     job: "pg_dump -U postgres ttrss | 7z a /ttrss.7z -mx3 -sittrss.sql"
