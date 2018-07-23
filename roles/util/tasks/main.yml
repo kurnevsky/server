@@ -17,6 +17,8 @@
     - sudo
     - cronie
     - zsh
+    - zsh-autosuggestions
+    - zsh-syntax-highlighting
     - mc
     - p7zip
 
@@ -33,3 +35,13 @@
     user: root
     state: present
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+
+- name: "Put zshrc to root home"
+  copy:
+    src: files/zshrc
+    dest: /root/.zshrc
+
+- name: "Change root shell to zsh"
+  user:
+    name: root
+    shell: /bin/zsh
