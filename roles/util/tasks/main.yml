@@ -9,6 +9,15 @@
     name: en_US.UTF-8
     state: present
 
+- name: "Enable pacman options"
+  lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^\s*#?\s*{{ item }}$'
+    line: '{{ item }}'
+  with_items:
+    - Color
+    - VerbosePkgLists
+
 - name: "Install helpful tools"
   pacman:
     name: "{{ item }}"
