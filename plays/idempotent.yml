@@ -27,3 +27,6 @@
       tags: ['nginx']
     - role: shadowsocks
       tags: ['shadowsocks']
+    - role: tor
+      tags: ['tor']
+      when: tor_enabled

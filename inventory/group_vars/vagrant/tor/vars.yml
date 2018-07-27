@@ -1,0 +1,4 @@
+tor_enabled: False
+tor_nickname: "vagrant"
+tor_bandwidth_rate: "128KB"
+tor_bandwidth_burst: "256KB"
