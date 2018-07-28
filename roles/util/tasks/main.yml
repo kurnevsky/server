@@ -39,11 +39,6 @@
     - python2-psycopg2
     - python2-pyopenssl
 
-- name: "Put zshrc to root's home"
-  copy:
-    src: files/zshrc
-    dest: /root/.zshrc
-
 - name: "Configure root user"
   user:
     name: root
@@ -56,12 +51,15 @@
     shell: /bin/zsh
     password: "{{ user_password | password_hash('sha512') }}"
 
-- name: "Put zshrc to user's home"
+- name: "Put zshrc to home"
   copy:
     src: files/zshrc
-    dest: "/home/{{ user_name }}/.zshrc"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
+    dest: "~{{ item }}/.zshrc"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  with_items:
+    - root
+    - "{{ user_name }}"
 
 - name: "Add authorized key"
   authorized_key:
