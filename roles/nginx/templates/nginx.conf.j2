@@ -5,6 +5,8 @@ events {
 }
 
 http {
+  types_hash_max_size 4096;
+
   include       mime.types;
   default_type  application/octet-stream;
 
