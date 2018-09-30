@@ -1,3 +1,4 @@
+#jinja2: trim_blocks:False
 [Unit]
 Description=A server application to run tox node written in pure Rust
 After=local-fs.target network.target
@@ -5,7 +6,7 @@ After=local-fs.target network.target
 [Service]
 User=tox
 EnvironmentFile=/etc/tox-node.env
-ExecStart=/usr/bin/tox-node {{ tox_node_args | join(' ') }}
+ExecStart=/usr/bin/tox-node {{ tox_node_args | join(' ') }} {% for item in tox_bootstrap_nodes %}--bootstrap-node '{{ item | join('\' \'') }}' {% endfor %}
 Type=simple
 StandardOutput=null
 StandardError=null
