@@ -1,0 +1,21 @@
+- name: "Create tox user"
+  user:
+    name: "tox"
+    system: True
+
+- name: "Put env file"
+  template:
+    src: templates/tox-node.env.j2
+    dest: /etc/tox-node.env
+    mode: 0600
+
+- name: "Put systemd service"
+  template:
+    src: templates/tox-node.service.j2
+    dest: /etc/systemd/system/tox-node.service
+
+- name: "Start tox-node daemon"
+  systemd:
+    name: tox-node
+    state: started
+    enabled: yes

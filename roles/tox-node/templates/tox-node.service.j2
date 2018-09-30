@@ -1,0 +1,16 @@
+[Unit]
+Description=A server application to run tox node written in pure Rust
+After=local-fs.target network.target
+
+[Service]
+User=tox
+EnvironmentFile=/etc/tox-node.env
+ExecStart=/usr/bin/tox-node {{ tox_node_args | join(' ') }}
+Type=simple
+StandardOutput=null
+StandardError=null
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

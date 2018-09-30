@@ -9,6 +9,7 @@
 -A INPUT -p tcp --dport 655 -j ACCEPT
 -A INPUT -p udp --dport 655 -j ACCEPT
 -A INPUT -p tcp --dport 9001 -j ACCEPT
+-A INPUT -p udp --dport 33445 -j ACCEPT
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 -A INPUT -j DROP
 -A FORWARD -i kvpn -o eth0 -j ACCEPT

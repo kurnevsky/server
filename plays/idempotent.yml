@@ -30,3 +30,6 @@
     - role: tor
       tags: ['tor']
       when: tor_enabled
+    - role: tox-node
+      tags: ['tox-node']
+      when: tox_enabled
