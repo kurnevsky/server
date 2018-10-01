@@ -31,6 +31,6 @@
 
 - name: "Start obfs-tls daemon"
   systemd:
-    name: obfs-tls@{{ ansible_host }}
+    name: obfs-tls@{{ shadowsocks_address | default(ansible_host) }}
     state: started
     enabled: yes
