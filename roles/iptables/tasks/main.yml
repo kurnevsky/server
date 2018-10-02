@@ -1,10 +1,16 @@
 - name: "Put iptables.rules"
   copy:
     src: files/iptables.rules
-    dest: /etc/iptables/iptables.rules
+    dest: "{{ item }}"
   notify: "Apply iptables rules"
+  with_items:
+    - /etc/iptables/iptables.rules
+    - /etc/iptables/ip6tables.rules
 
 - name: "Enable iptables loader"
   systemd:
-    name: iptables
+    name: "{{ item }}"
     enabled: yes
+  with_items:
+    - iptables
+    - ip6tables
