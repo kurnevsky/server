@@ -1,3 +1,13 @@
+*mangle
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A OUTPUT -o eth0 -m owner --uid-owner tor -j CLASSIFY --set-class 1:10
+-A OUTPUT -o eth0 -m owner --uid-owner tox -j CLASSIFY --set-class 1:11
+COMMIT
+
 *filter
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
