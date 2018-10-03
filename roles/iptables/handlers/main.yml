@@ -1,2 +1,4 @@
 - name: "Apply iptables rules"
-  shell: iptables-restore /etc/iptables/iptables.rules
+  shell: |
+    iptables-restore /etc/iptables/iptables.rules
+    ip6tables-restore /etc/iptables/ip6tables.rules
