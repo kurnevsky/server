@@ -2,6 +2,7 @@ tox_enabled: False
 tox_secret_key: '42c9b5896e64a35a290ee2d0c63bae367c40707020bc0eefb142968bc1930dde'
 tox_node_args:
   - --udp-address '[::]:33445'
+  - --tcp-address '[::]:33445'
   - --no-lan
   - --log-type 'Syslog'
   - --motd {% raw %}'Hi from tox-rs! I\'m up {{ uptime }}.'{% endraw %}
