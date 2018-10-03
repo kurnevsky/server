@@ -15,6 +15,8 @@
       tags: ['util']
     - role: iptables
       tags: ['iptables']
+    - role: tc
+      tags: ['tc']
     - role: tinc
       tags: ['tinc']
     - role: postgresql

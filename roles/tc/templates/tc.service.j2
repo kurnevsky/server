@@ -1,0 +1,15 @@
+[Unit]
+Description=Add tc rules
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=tc qdisc add dev eth0 root handle 1:0 htb
+ExecStart=tc class add dev eth0 parent 1:0 classid 1:1 htb rate {{ tc_ceil }}
+ExecStart=tc class add dev eth0 parent 1:1 classid 1:10 htb rate {{ tc_tor_rate }} ceil {{ tc_ceil }}
+ExecStart=tc class add dev eth0 parent 1:1 classid 1:11 htb rate {{ tc_tox_rate }} ceil {{ tc_ceil }}
+ExecStop=tc qdisc del root dev eth0
+
+[Install]
+WantedBy=default.target

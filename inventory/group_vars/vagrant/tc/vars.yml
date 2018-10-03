@@ -1,0 +1,3 @@
+tc_ceil: 256kbps
+tc_tor_rate: 128kbps
+tc_tox_rate: 128kbps
