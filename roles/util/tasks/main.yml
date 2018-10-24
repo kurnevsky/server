@@ -18,6 +18,18 @@
     - Color
     - VerbosePkgLists
 
+- name: "Set ulimit"
+  lineinfile:
+    path: /etc/systemd/system.conf
+    regexp: '^\s*#?\s*DefaultLimitNOFILE='
+    line: 'DefaultLimitNOFILE=8192'
+
+- name: "Set logs size limit"
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    regexp: '^\s*#?\s*SystemMaxUse='
+    line: 'SystemMaxUse=512M'
+
 - name: "Install helpful tools"
   pacman:
     name: "{{ item }}"
@@ -30,6 +42,7 @@
     - zsh-syntax-highlighting
     - mc
     - p7zip
+    - lsof
 
 - name: "Install ansible utils"
   pacman:
