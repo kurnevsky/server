@@ -2,6 +2,7 @@
   user:
     name: "tox"
     system: True
+    home: /var/lib/tox
 
 - name: "Put env file"
   template:
