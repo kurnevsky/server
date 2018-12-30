@@ -8,6 +8,7 @@ User=tox
 EnvironmentFile=/etc/tox-node.env
 ExecStart=/usr/bin/tox-node {{ tox_node_args | join(' ') }} {% for item in tox_bootstrap_nodes %}--bootstrap-node '{{ item | join('\' \'') }}' {% endfor %}
 Type=simple
+LimitNOFILE=8192
 StandardOutput=null
 StandardError=null
 Restart=always
