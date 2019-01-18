@@ -13,6 +13,11 @@
     src: templates/torrc.j2
     dest: /etc/tor/torrc
 
+- name: "Put systemd service"
+  template:
+    src: templates/tor.service.j2
+    dest: /etc/systemd/system/tor.service
+
 - name: "Start tor daemon"
   systemd:
     name: tor
