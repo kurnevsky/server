@@ -26,25 +26,23 @@
 
 - name: "Install helpful tools"
   pacman:
-    name: "{{ item }}"
+    name:
+      - sudo
+      - cronie
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - mc
+      - p7zip
+      - lsof
     state: present
-  with_items:
-    - sudo
-    - cronie
-    - zsh
-    - zsh-autosuggestions
-    - zsh-syntax-highlighting
-    - mc
-    - p7zip
-    - lsof
 
 - name: "Install ansible utils"
   pacman:
-    name: "{{ item }}"
+    name:
+      - python2-psycopg2
+      - python2-pyopenssl
     state: present
-  with_items:
-    - python2-psycopg2
-    - python2-pyopenssl
 
 - name: "Configure root user"
   user:
