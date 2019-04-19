@@ -62,9 +62,15 @@ http {
     client_max_body_size 10G;
     fastcgi_buffers 64 4K;
 
-    location / {
+    location = / {
       root /srv/http;
       try_files /index.html =404;
+    }
+
+    location /static/ {
+      alias /srv/http/static/;
+      try_files $uri =404;
+      expires 24h;
     }
 
     location /tt-rss {

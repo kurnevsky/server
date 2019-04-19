@@ -55,6 +55,16 @@
     src: templates/index.html.j2
     dest: /srv/http/index.html
 
+- name: "Create static content directory"
+  file:
+    path: "/srv/http/static"
+    state: directory
+
+- name: "Create asc file"
+  copy:
+    content: "{{ nginx_static_asc }}"
+    dest: /srv/http/static/kurnevsky.asc
+
 - name: "Put nginx config"
   template:
     src: templates/nginx.conf.j2
