@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>{{ nginx_index_name }}</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1 id="name">{{ nginx_index_name }}</h1>
+    <h2 id="contacts">Contacts</h2>
+    <p>Email: <a href="mailto:{{ nginx_index_email }}">{{ nginx_index_email }}</a></p>
+    <p>XMPP: <a href="xmpp:{{ nginx_index_xmpp }}">{{ nginx_index_xmpp }}</a></p>
+    <p>Matrix: {{ nginx_index_matrix }}</p>
+    <p>Tox: {{ nginx_index_tox }}</p>
+    <h2 id="gnupg-key">GnuPG Key</h2>
+    <p>
+      Id: 412D750C<br/>
+      Fingerprint: E92A 8B0A D80C 20DF 74B8  F3EB 8FF4 44E5 412D 750C<br/>
+      <!-- Public key: <a href="./static/kurnevsky.asc">kurnevsky.asc</a> -->
+    </p>
+  </body>
+</html>

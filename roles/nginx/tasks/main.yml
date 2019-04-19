@@ -50,6 +50,11 @@
       when: not letsencrypt_cert.stat.exists
   when: acme
 
+- name: "Put index.html"
+  template:
+    src: templates/index.html.j2
+    dest: /srv/http/index.html
+
 - name: "Put nginx config"
   template:
     src: templates/nginx.conf.j2
