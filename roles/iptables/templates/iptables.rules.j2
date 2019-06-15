@@ -4,8 +4,12 @@
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 :POSTROUTING ACCEPT [0:0]
+{% if tor_enabled %}
 -A OUTPUT -o eth0 -m owner --uid-owner tor -j CLASSIFY --set-class 1:10
+{% endif %}
+{% if tox_enabled %}
 -A OUTPUT -o eth0 -m owner --uid-owner tox -j CLASSIFY --set-class 1:11
+{% endif %}
 COMMIT
 
 *filter
@@ -18,9 +22,13 @@ COMMIT
 -A INPUT -p tcp --dport 443 -j ACCEPT
 -A INPUT -p tcp --dport 655 -j ACCEPT
 -A INPUT -p udp --dport 655 -j ACCEPT
+{% if tor_enabled %}
 -A INPUT -p tcp --dport 9001 -j ACCEPT
+{% endif %}
+{% if tox_enabled %}
 -A INPUT -p tcp --dport 33445 -j ACCEPT
 -A INPUT -p udp --dport 33445 -j ACCEPT
+{% endif %}
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 -A INPUT -j DROP
 -A FORWARD -i kvpn -o eth0 -j ACCEPT

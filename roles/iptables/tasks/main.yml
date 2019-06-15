@@ -1,6 +1,6 @@
 - name: "Put iptables.rules"
-  copy:
-    src: files/iptables.rules
+  template:
+    src: templates/iptables.rules.j2
     dest: "{{ item }}"
   notify: "Apply iptables rules"
   with_items:
