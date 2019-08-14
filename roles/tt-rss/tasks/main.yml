@@ -1,6 +1,8 @@
 - name: "Install php-pgsql"
   pacman:
-    name: php-pgsql
+    name:
+      - php-intl
+      - php-pgsql
     state: present
 
 - name: "Install tt-rss"
@@ -32,6 +34,7 @@
   with_items:
     - curl
     - iconv
+    - intl
     - pdo_pgsql
     - pgsql
     - soap
