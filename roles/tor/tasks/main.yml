@@ -3,11 +3,6 @@
     name: tor
     state: present
 
-- name: "Install anonymizing relay monitor"
-  pacman:
-    name: arm
-    state: present
-
 - name: "Put tor config"
   template:
     src: templates/torrc.j2
