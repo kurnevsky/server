@@ -2,7 +2,6 @@
 server ansible_host=kurnevsky.net
 
 [servers:vars]
-ansible_python_interpreter=/bin/python2
 ansible_ssh_user=root
 
 [digitalocean:children]

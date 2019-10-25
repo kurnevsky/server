@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: install python
-      raw: pacman -S --needed --noconfirm python2
+      raw: pacman -S --needed --noconfirm python
       changed_when: False
 
 - hosts: servers

@@ -40,8 +40,8 @@
 - name: "Install ansible utils"
   pacman:
     name:
-      - python2-psycopg2
-      - python2-pyopenssl
+      - python-psycopg2
+      - python-pyopenssl
     state: present
 
 - name: "Configure root user"
