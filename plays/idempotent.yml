@@ -35,3 +35,5 @@
     - role: tox-node
       tags: ['tox-node']
       when: tox_enabled
+    - role: iodine
+      tags: ['iodine']

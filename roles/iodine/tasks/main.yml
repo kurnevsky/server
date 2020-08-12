@@ -1,0 +1,15 @@
+- name: "Install iodine"
+  pacman:
+    name: iodine
+    state: present
+
+- name: "Put iodine config"
+  template:
+    src: templates/iodined.j2
+    dest: /etc/conf.d/iodined
+
+- name: "Start iodine daemon"
+  systemd:
+    name: iodined
+    state: started
+    enabled: yes
