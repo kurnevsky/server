@@ -1,0 +1,10 @@
+[Unit]
+After=network.target
+Requires=network.target
+
+[Service]
+EnvironmentFile=/etc/conf.d/ptunnel
+ExecStart=/usr/bin/ptunnel-ng -P $PTUNNEL_PASSWORD
+
+[Install]
+WantedBy=multi-user.target

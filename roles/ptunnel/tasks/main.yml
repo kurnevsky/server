@@ -1,0 +1,20 @@
+- name: "Install ptunnel-ng"
+  pacman:
+    name: ptunnel-ng
+    state: present
+
+- name: "Put systemd service"
+  copy:
+    src: files/ptunnel.service
+    dest: /etc/systemd/system/ptunnel.service
+
+- name: "Put ptunnel config"
+  template:
+    src: templates/ptunnel.j2
+    dest: /etc/conf.d/ptunnel
+
+- name: "Start ptunnel daemon"
+  systemd:
+    name: ptunnel
+    state: started
+    enabled: yes
