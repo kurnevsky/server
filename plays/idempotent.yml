@@ -39,3 +39,7 @@
       tags: ['iodine']
     - role: ptunnel
       tags: ['ptunnel']
+      when: ptunnel_enabled
+    - role: hans
+      tags: ['hans']
+      when: hans_enabled

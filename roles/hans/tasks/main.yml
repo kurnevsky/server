@@ -1,0 +1,20 @@
+- name: "Install hans"
+  pacman:
+    name: hans
+    state: present
+
+- name: "Put systemd service"
+  copy:
+    src: files/hans.service
+    dest: /etc/systemd/system/hans.service
+
+- name: "Put hans config"
+  template:
+    src: templates/hans.j2
+    dest: /etc/conf.d/hans
+
+- name: "Start hans daemon"
+  systemd:
+    name: hans
+    state: started
+    enabled: yes

@@ -1,0 +1,10 @@
+[Unit]
+After=network.target
+Requires=network.target
+
+[Service]
+EnvironmentFile=/etc/conf.d/hans
+ExecStart=/usr/bin/hans -f -v -d icmp -m $TUN_MTU -s $TUN_IP -p $HANS_PASSWORD
+
+[Install]
+WantedBy=multi-user.target
