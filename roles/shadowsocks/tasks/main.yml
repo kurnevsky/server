@@ -3,9 +3,9 @@
     name: shadowsocks-libev
     state: present
 
-- name: "Install simple obfs"
+- name: "Install v2ray"
   pacman:
-    name: simple-obfs
+    name: shadowsocks-v2ray-plugin
     state: present
 
 - name: "Create shadowsocks config directory"
@@ -21,16 +21,5 @@
 - name: "Start shadowsocks daemon"
   systemd:
     name: shadowsocks-libev-server@config
-    state: started
-    enabled: yes
-
-- name: "Put obfs-tls systemd service"
-  copy:
-    src: files/obfs-tls@.service
-    dest: /etc/systemd/system/obfs-tls@.service
-
-- name: "Start obfs-tls daemon"
-  systemd:
-    name: obfs-tls@{{ shadowsocks_address | default(ansible_host) }}
     state: started
     enabled: yes

@@ -25,7 +25,7 @@ http {
   server_tokens off;
 
   server {
-    listen 8443 ssl;
+    listen 443 ssl;
     server_name kurnevsky.net;
     root /usr/share/webapps;
 
@@ -65,6 +65,16 @@ http {
     location = / {
       root /srv/http;
       try_files /index.html =404;
+    }
+
+    location = /ss {
+        proxy_redirect off;
+        proxy_http_version 1.1;
+        proxy_pass http://localhost:8388;
+        proxy_set_header Host $http_host;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 300s;
     }
 
     location /static/ {
