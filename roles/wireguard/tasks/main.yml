@@ -1,0 +1,43 @@
+- name: "Install wireguard-tools"
+  pacman:
+    name: wireguard-tools
+    state: present
+
+- name: "Create wireguard keys directory"
+  file:
+    path: /etc/wg
+    state: directory
+
+- name: "Put wireguard private key"
+  copy:
+    content: "{{ wireguard_private_key }}\n"
+    dest: "/etc/wg/{{ wireguard_name }}.key"
+    mode: 0640
+    group: systemd-network
+
+- name: "Put wireguard preshared keys"
+  copy:
+    content: "{{ item.preshared_key }}\n"
+    dest: "/etc/wg/{{ item.name }}-{{ wireguard_name }}.psk"
+    mode: 0640
+    group: systemd-network
+  loop: "{{ wireguard_peers }}"
+  no_log: True
+
+- name: "Put wireguard netdev config"
+  template:
+    src: templates/99-wg0.netdev.j2
+    dest: /etc/systemd/network/99-wg0.netdev
+  register: wireguard_netdev
+
+- name: "Put wireguard network config"
+  copy:
+    src: files/99-wg0.network
+    dest: /etc/systemd/network/99-wg0.network
+  register: wireguard_network
+
+- name: "Start systemd-networkd"
+  systemd:
+    name: systemd-networkd
+    state: "{{ 'restarted' if wireguard_netdev.changed or wireguard_network.changed else 'started' }}"
+    enabled: yes

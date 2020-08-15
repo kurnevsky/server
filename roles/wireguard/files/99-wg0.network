@@ -1,0 +1,9 @@
+[Match]
+Name=wg0
+
+[Network]
+Address=192.168.14.1/32
+
+[Route]
+Gateway=192.168.14.1
+Destination=192.168.14.0/24

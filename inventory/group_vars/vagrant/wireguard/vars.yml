@@ -1,0 +1,6 @@
+wireguard_name: "vagrant"
+wireguard_private_key: "sB1Mhw2BLPXKqr2i97N8yTYhv1QIFlQuAAu9pZZcUn0="
+wireguard_peers:
+  - name: "home"
+    public_key: "aRD0dqodCPyqTklk0KinKiTXYTnIBXZ0WFKy/q0dhQo="
+    preshared_key: "veKiO9chwP4z5Goqyz+OnDhwrcokFwpiYgsWSX/nMx4="

@@ -1,0 +1,15 @@
+[NetDev]
+Name=wg0
+Kind=wireguard
+Description=WireGuard tunnel wg0
+
+[WireGuard]
+ListenPort=51871
+PrivateKeyFile=/etc/wg/{{ wireguard_name }}.key
+{% for peer in wireguard_peers %}
+
+[WireGuardPeer]
+PublicKey={{ peer.public_key }}
+PresharedKeyFile=/etc/wg/{{ peer.name }}-{{ wireguard_name }}.psk
+AllowedIPs=192.168.14.{{ loop.index + 1 }}/32
+{% endfor %}

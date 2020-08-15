@@ -43,3 +43,5 @@
     - role: hans
       tags: ['hans']
       when: hans_enabled
+    - role: wireguard
+      tags: ['wireguard']
