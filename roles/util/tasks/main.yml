@@ -107,6 +107,12 @@
     insertafter: '^\s*#?\s*Port'
     line: 'Port 43683'
 
+- name: "Set motd"
+  copy:
+    content: "Abandon all hope, ye who enter here.\n"
+    dest: "/etc/motd"
+    mode: 0644
+
 - name: "Start cronie daemon"
   systemd:
     name: cronie
