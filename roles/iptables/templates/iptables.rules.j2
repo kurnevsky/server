@@ -32,6 +32,7 @@ COMMIT
 -A INPUT -p udp --dport 33445 -j ACCEPT
 {% endif %}
 -A INPUT -p tcp --dport 43683 -j ACCEPT
+-A INPUT -p tcp --dport 49528 -j ACCEPT
 -A INPUT -p udp --dport 51871 -j ACCEPT
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 -A INPUT -j DROP
