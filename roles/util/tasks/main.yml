@@ -95,6 +95,18 @@
     - root
     - "{{ user_name }}"
 
+- name: "Set ssh port 22"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^\s*#?\s*Port 22'
+    line: 'Port 22'
+
+- name: "Set ssh port 43683"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    insertafter: '^\s*#?\s*Port'
+    line: 'Port 43683'
+
 - name: "Start cronie daemon"
   systemd:
     name: cronie
