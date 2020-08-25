@@ -79,3 +79,8 @@ alias zmv='noglob zmv -W'
 aliases[=]='noglob zcalc -e'
 
 export EDITOR=nano
+
+if [[ $- == *i* ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+  tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+  exit 0
+fi

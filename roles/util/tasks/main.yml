@@ -35,6 +35,7 @@
       - mc
       - p7zip
       - lsof
+      - tmux
     state: present
 
 - name: "Install ansible utils"
