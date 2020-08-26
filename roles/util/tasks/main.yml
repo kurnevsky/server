@@ -67,6 +67,16 @@
     - root
     - "{{ user_name }}"
 
+- name: "Put tmux config to home"
+  copy:
+    src: files/.tmux.conf
+    dest: "~{{ item }}/.tmux.conf"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  with_items:
+    - root
+    - "{{ user_name }}"
+
 - name: "Create mc config directory"
   file:
     path: "~{{ item }}/.config/mc"
